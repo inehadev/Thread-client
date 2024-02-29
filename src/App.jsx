@@ -5,6 +5,7 @@ import { px } from "framer-motion"
 import { Route , Routes } from "react-router-dom"
 import Userpage from "../Pages/Userpage"
 import Postpage from "../Pages/Postpage"
+import Header from "../Components/Header"
 
 function App() {
  
@@ -12,6 +13,7 @@ function App() {
   return (
     <>
      <Container maxW="620px">
+     <Header/>
      <Routes>
       <Route index='/:username' element={<Userpage/>} />
       <Route path='/:username/post/:pid' element={<Postpage/>} />
