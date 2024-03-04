@@ -73,14 +73,15 @@ const UserPost = ({postIMG , postTitle , likes , replies}) => {
                     <Image src={postIMG} w="full" />
                     </Box> )}
 
-                <Flex gap={3} my={1}></Flex>
-                <Action liked={liked} setliked={setliked} />
+                <Flex gap={3} my={1}>
+                 <Action liked={liked} setliked={setliked} />
                 </Flex>
 
-                <Flex ml={10} gap={3} alignItems={"center"}>
+                <Flex  gap={3} alignItems={"center"}>
                     <Text color={"gray"} fontSize={"sm"}>{replies} replies</Text>
                     <Box w={0.5 } borderRadius={"full"} bg={"gray"}></Box>
                     <Text color={"gray"} fontSize={"sm"}>{likes} likes</Text>
+                </Flex>
                 </Flex>
                 </Flex>
                
