@@ -24,7 +24,7 @@ export default function SignupCard() {
 
   return (
     <Flex
-      minH={'100vh'}
+      minH={'40vh'}
       align={'center'}
       justify={'center'}
     
@@ -32,7 +32,7 @@ export default function SignupCard() {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
-            Sign up
+           Login
           </Heading>
           
         </Stack>
@@ -45,34 +45,28 @@ export default function SignupCard() {
             <HStack>
               <Box>
                 <FormControl  isRequired>
-                  <FormLabel>First Name</FormLabel>
+                  <FormLabel>Username</FormLabel>
                   <Input type="text" />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl isRequired>
-                  <FormLabel>Username</FormLabel>
-                  <Input type="text" />
-                </FormControl>
-              </Box>
-            </HStack>
-            <FormControl  isRequired>
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl  isRequired>
-              <FormLabel>Password</FormLabel>
-              <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} />
+                  <FormLabel>Password</FormLabel>
+                  <InputGroup>
+                  <Input type={showPassword ? 'text' : 'password'} />
+                  
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
                     onClick={() => setShowPassword((showPassword) => !showPassword)}>
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                   </Button>
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
+                  </InputRightElement>
+                  </InputGroup>
+                </FormControl>
+              </Box>
+            </HStack>
+           
             <Stack spacing={10} pt={2}>
               <Button
                 loadingText="Submitting"
@@ -87,7 +81,7 @@ export default function SignupCard() {
             </Stack>
             <Stack pt={6}>
               <Text align={'center'}>
-                Don't have an account <Link color={'blue.400'}>sign up</Link>
+                Don't have an account <Link color={'blue.400'}><a href='/Auth'>Sign Up</a></Link>
               </Text>
             </Stack>
           </Stack>
