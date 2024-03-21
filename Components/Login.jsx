@@ -19,7 +19,7 @@ import {
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
-export default function Login() {
+export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
@@ -32,14 +32,33 @@ export default function Login() {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
-           Login
+            Sign up
           </Heading>
           
         </Stack>
-       
+        <Box
+          rounded={'lg'}
+          bg={useColorModeValue('white', 'gray.800')}
+          boxShadow={'lg'}
+          p={8}>
+          <Stack spacing={4}>
+            <HStack>
+              <Box>
+                <FormControl  isRequired>
+                  <FormLabel>First Name</FormLabel>
+                  <Input type="text" />
+                </FormControl>
+              </Box>
+              <Box>
+                <FormControl isRequired>
+                  <FormLabel>Username</FormLabel>
+                  <Input type="text" />
+                </FormControl>
+              </Box>
+            </HStack>
             <FormControl  isRequired>
-              <FormLabel>Username</FormLabel>
-              <Input type="text" />
+              <FormLabel>Email address</FormLabel>
+              <Input type="email" />
             </FormControl>
             <FormControl  isRequired>
               <FormLabel>Password</FormLabel>
@@ -63,17 +82,17 @@ export default function Login() {
                 _hover={{
                   bg: useColorModeValue("gray.600", "gray.700")
                 }}>
-                Login
+                Sign up
               </Button>
             </Stack>
             <Stack pt={6}>
               <Text align={'center'}>
-               Don't have  an account <Link color={'blue.400'}>Login</Link>
+                Don't have an account <Link color={'blue.400'}>sign up</Link>
               </Text>
             </Stack>
           </Stack>
-      
-    
+        </Box>
+      </Stack>
     </Flex>
   )
 }
