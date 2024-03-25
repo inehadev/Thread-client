@@ -1,55 +1,34 @@
 'use client'
 
-
-import {
-  Flex,
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  HStack,
-  InputRightElement,
-  Stack,
-  Button,
-  Heading,
-  Text,
-  useColorModeValue,
-  Link,
-} from '@chakra-ui/react'
-import { useState } from 'react'
+import { Flex,Box,FormControl,FormLabel , Input, InputGroup , HStack,InputRightElement, Stack,Button,Heading,Text,useColorMode, Link} from '@chakra-ui/react'
+import { useContext, useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useSetRecoilState } from 'recoil'
 import authScreenAtom from '../atoms/authAtom'
+import { AuthContext } from '../src/Context/AuthContext'
+import { useNavigate } from 'react-router-dom'
+
+
 
 export default function SignupCard() {
+  const {UserRegister}=useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false)
   const setAuthScreenState = useSetRecoilState(authScreenAtom);
+  const [Name , setName]=useState('');
+  const navigate = useNavigate()
   const [inputs, setinputs]=useState({
     name:"",
     username:"",
     email:"",
     password:"",
   });
-  const handleSignup = async ()=>{
-    const res=await fetch("/register" ,
-   {
-    method:"POST",
-    headers:{
-     "Content-Type":"application/json" 
-    },
-    body:JSON.stringify(inputs),
-
-   });
-   const data = await res.json()
-
-    try {
-      
-    } catch (error) {
-      console.log(error);
-      
+  const handleSignup = async (e)=>{
+    e.preventDefault();
+    await UserRegister(inputs.name, inputs.username, inputs.email, inputs.password);
+    navigate('/');
+    
     }
-  }
+  
 
   return (
     <Flex
@@ -67,7 +46,7 @@ export default function SignupCard() {
         </Stack>
         <Box
           rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.800')}
+          bg={('white', 'gray.800')}
           boxShadow={'lg'}
           p={8}>
           <Stack spacing={4}>
@@ -75,7 +54,7 @@ export default function SignupCard() {
               <Box>
                 <FormControl  isRequired>
                   <FormLabel> Name</FormLabel>
-                  <Input type="text"  onChange={(e)=>setinputs({...inputs, name:e.target.value})}/>
+                  <Input type="text"  onChange={(e)=>setName(e.target.value)}/>
                 </FormControl>
               </Box>
               <Box>
@@ -106,10 +85,10 @@ export default function SignupCard() {
               <Button
                 loadingText="Submitting"
                 size="lg"
-                bg ={ useColorModeValue("gray.600", "gray.700")}
+                bg ={ ("gray.600", "gray.700")}
                 color={'white'}
                 _hover={{
-                  bg: useColorModeValue("gray.600", "gray.700"),
+                  bg: useColorMode("gray.600", "gray.700"),
                  
                 }} onClick={handleSignup} >
                 Sign up
@@ -124,5 +103,7 @@ export default function SignupCard() {
         </Box>
       </Stack>
     </Flex>
-  )
-}
+  )}
+  
+              
+            

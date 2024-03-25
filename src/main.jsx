@@ -6,6 +6,7 @@ import { ChakraProvider, ColorModeScript, extendTheme } from '@chakra-ui/react'
 import {mode} from '@chakra-ui/theme-tools'
 import {BrowserRouter} from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
+import { AuthProvider } from './Context/AuthContext.jsx'
 
 const styles = {
   global:(props)=>({
@@ -32,11 +33,14 @@ const theme = extendTheme ({config , styles , color})
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    
     <RecoilRoot>
     <BrowserRouter>
    <ChakraProvider theme = {theme}>
     <ColorModeScript initialColorMode={theme.config.initialColorMode } />
+    <AuthProvider>
    <App />
+   </AuthProvider>
     </ChakraProvider>
     </BrowserRouter>
     </RecoilRoot>
