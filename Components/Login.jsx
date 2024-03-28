@@ -17,44 +17,27 @@ import {
   Link,
   Alert,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState  , useContext} from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useSetRecoilState } from 'recoil'
 import authScreenAtom from '../atoms/authAtom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../src/Context/AuthContext'
 
 export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false)
    const setAuthScreenState= useSetRecoilState(authScreenAtom);
    const [username ,setusername]=useState('');
    const [password , setpassword]=useState('');
+   const {UserLogin} = useContext(AuthContext);
    const navigate = useNavigate();
 
    const handlelogin = async()=>{
 
-    try {
-      const bodyParameter=({
-        username:username,
-        password:password
-      })
-
-      const axiosheader= {
-        "Accept":"application/json"
-      }
-
-      const response= await axios.post('http://localhost:5000/login' ,bodyParameter , axiosheader);
-      console.log(response);
-      console.log(response.data);
-      const token =localStorage.setItem("x-auth-token" , response.data.token);
-      const userdata=await response.data.token;
-      alert("Login successfull");
+      await UserLogin(username  , password);
+      alert("Login successful");
       navigate('/')
-      
-    } catch (error) {
-      console.log(error.message)
-      
-    }
 
    }
 

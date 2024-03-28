@@ -26,8 +26,36 @@ const UserRegister =  async(name , username , email , password)=>{
         
     }
 }
-return <AuthContext.Provider value={{UserRegister}} >{children}</AuthContext.Provider>
+
+
+const UserLogin = async(username , password)=>{
+    try {
+        const bodyParameter=({
+          username:username,
+          password:password
+        })
+  
+        const axiosheader= {
+          "Accept":"application/json"
+        }
+  
+        const response= await axios.post('http://localhost:5000/login' ,bodyParameter , axiosheader);
+        console.log(response);
+        console.log(response.data);
+        const token =localStorage.setItem("x-auth-token" , response.data.token);
+        const userdata=await response.data.token;
+        alert("Login successfull");
+        navigate('/')
+        
+      } catch (error) {
+        console.log(error.message)
+        
+      }
+}
+return <AuthContext.Provider value={{UserRegister , UserLogin}} >{children}</AuthContext.Provider>
 
 }
+
+
 
 export {AuthContext,AuthProvider};

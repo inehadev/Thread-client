@@ -1,54 +1,43 @@
 'use client'
 
 import { Flex,Box,FormControl,FormLabel , Input, InputGroup , HStack,InputRightElement, Stack,Button,Heading,Text,useColorMode, Link, useColorModeValue} from '@chakra-ui/react'
-import {  useState } from 'react'
+import {  useState , useContext } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useSetRecoilState } from 'recoil'
 import authScreenAtom from '../atoms/authAtom'
 import axios from 'axios'
-// import { AuthContext } from '../src/Context/AuthContext'
+import { AuthContext } from '../src/Context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 
 
 export default function SignupCard() {
-  // const {UserRegister}=useContext(AuthContext);
+  const {UserRegister}=useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false)
   const setAuthScreenState = useSetRecoilState(authScreenAtom);
 
   const navigate = useNavigate()
-  const [inputs, setinputs]=useState({
-    name:"",
-    username:"",
-    email:"",
-    password:"",
-  });
-   
-  const handleSignup = async ()=>{
-    console.log(inputs.username , inputs.name , inputs.email , inputs.password);
+  const [name , setname ]=useState('');
+  const [username , setusername ]=useState('');
+  const [email,setemail]=useState('');
+  const [password,setpassword]=useState('');
+  
+
+  const handleSignup = async()=>{
     try {
-      const bodyParameter=({
-        name:inputs.name,
-        username:inputs.username,
-        email:inputs.email,
-        password:inputs.password
-      })
-console.log("working")
-      const axiosheader={
-        "Accept":"application/json"
-      }
-console.log("all ok")
-      const response = await axios.post('http://localhost:5000/register' , bodyParameter , axiosheader);
-      console.log("till okay")
-      console.log(response);
-      return response.status;
+      
+
+      await UserRegister(name , username, email , password);
+      alert("Register successfull");
+     navigate('/auth');
+
 
     } catch (error) {
       console.log(error.message);
       
     }
   }
-
+  
   return (
     <Flex
       minH={'100vh'}
@@ -73,24 +62,24 @@ console.log("all ok")
               <Box>
                 <FormControl  isRequired>
                   <FormLabel> Name</FormLabel>
-                  <Input type="text"  onChange={(e)=>setinputs({...inputs, name:e.target.value})}/>
+                  <Input type="text"  onChange={(e)=>setname(e.target.value)}/>
                 </FormControl>
               </Box>
               <Box>
                 <FormControl isRequired>
                   <FormLabel>Username</FormLabel>
-                  <Input type="text"  onChange={(e)=>setinputs({...inputs, username:e.target.value})} />
+                  <Input type="text"  onChange={(e)=>setusername(e.target.value)} />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl  isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email"  onChange={(e)=>setinputs({...inputs, email:e.target.value})}/>
+              <Input type="email"  onChange={(e)=>setemail(e.target.value)}/>
             </FormControl>
             <FormControl  isRequired>
               <FormLabel >Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} onChange={(e)=>setinputs({...inputs, password:e.target.value})} />
+                <Input type={showPassword ? 'text' : 'password'} onChange={(e)=>setpassword(e.target.value)} />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
