@@ -28,12 +28,13 @@ export default function SignupCard() {
       
 
       await UserRegister(name , username, email , password);
-      alert("Register successfull");
-     navigate('/auth');
+      console.log(res.data);
+      
+       navigate('/auth');
 
 
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
       
     }
   }

@@ -7,9 +7,11 @@ import Userpage from "../Pages/Userpage"
 import Postpage from "../Pages/Postpage"
 import Header from "../Components/Header"
 import Auth from "../Pages/AuthPage"
+import { useRecoilValue } from "recoil"
+import userScreenAtom from "../atoms/userAtom"
 
 function App() {
- 
+ const user = useRecoilValue(userScreenAtom);
 
   return (
     <>
@@ -17,7 +19,8 @@ function App() {
      <Header/>
      <Routes>
      <Route path='/auth' element={<Auth/>} />
-      <Route index='/:username' element={<Userpage/>} />
+     <Route path='/' element={ user ?<Userpage/>  :<Navigate to ='/auth'/> } />
+      {/* <Route index='/:username' element={<Userpage/>} /> */}
       <Route path='/:username/post/:pid' element={<Postpage/>} />
      </Routes>
      </Container>

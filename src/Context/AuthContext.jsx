@@ -1,10 +1,14 @@
 import React from "react";
 import { createContext} from "react";
 import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 
 const AuthContext= createContext();
 
+
 const AuthProvider = ({children})=>{
+  const toast = useToast();
+
 const UserRegister =  async(name , username , email , password)=>{
   
     try {
@@ -20,11 +24,29 @@ const UserRegister =  async(name , username , email , password)=>{
             }
         } 
         const res= await axios.post("http://localhost:5000/register" , bodyParameter , axiosheader);
-        console.log(res.data);
+       const data=  await res.json();
+       if(data.error){
+        toast({
+          title:"Error",
+          description:data.error,
+          status:"error",
+          duration:3000,
+          isClosable:true
+        })
+       
+      
+      }
     } catch (error) {
-        console.log("error");
+        console.log(error.message);
+        if(data.error){
+          toast({
+            title:"Error",
+            description:data.error,
+            status:"error"
+          })
         
     }
+}
 }
 
 
