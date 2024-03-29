@@ -27,8 +27,8 @@ const UserRegister =  async(name , username , email , password)=>{
             }
         } 
         const res= await axios.post("http://localhost:5000/register" , bodyParameter , axiosheader);
-
        console.log(res.data)
+       
 
     } catch (error) {
         console.log(error.message);
@@ -55,9 +55,6 @@ const UserLogin = async(username , password)=>{
         const token =localStorage.setItem("x-auth-token" , response.data.token);
         const userdata=await response.data.token;
         
-      //  Navigate('/home');
-      //   alert("Login successfull");
-        
       } catch (error) {
         console.log(error.message)
         
@@ -68,15 +65,26 @@ const UserLogin = async(username , password)=>{
 const UserLogout = async()=>{
   
     try {
-      res.cookie("jwt" ,"" ,{maxAge:1});
-      res.status(200).json({error:"user logout sucessfully"});
+
+      // res.cookie("jwt" ,"" ,{maxAge:1});
+      // res.status(200).json({error:"user logout sucessfully"});
+      const bodyParameter=({
+
+      })
+
+      const header={
+        "Accept":"application/json"
+      }
+
+      const res= await axios.post("http://localhost:5000/logout" , header , bodyParameter);
    
     } catch (error) {
-       res.status(500).json({message:err.message});
+      //  res.status(500).json({message:err.message});
+      console.log("error")
     }
 
 }
-return <AuthContext.Provider value={{UserRegister , UserLogin , UserLogout}} >{children}</AuthContext.Provider>
+return <AuthContext.Provider value={{UserRegister , UserLogin, UserLogout }} >{children}</AuthContext.Provider>
 
 }
 

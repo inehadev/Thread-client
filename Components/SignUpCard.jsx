@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil'
 import authScreenAtom from '../atoms/authAtom'
 import axios from 'axios'
 import { AuthContext } from '../src/Context/AuthContext'
-import { Navigate, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 
 
 
