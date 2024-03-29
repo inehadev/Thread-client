@@ -27,29 +27,14 @@ const UserRegister =  async(name , username , email , password)=>{
             }
         } 
         const res= await axios.post("http://localhost:5000/register" , bodyParameter , axiosheader);
-       const data=  await res.json();
-       if(data.error){
-        toast({
-          title:"Error",
-          description:data.error,
-          status:"error",
-          duration:3000,
-          isClosable:true
-        })
-       
-      
-      }
+
+       console.log(res.data)
+
     } catch (error) {
         console.log(error.message);
-        if(data.error){
-          toast({
-            title:"Error",
-            description:data.error,
-            status:"error"
-          })
         
     }
-}
+
 }
 
 
@@ -70,8 +55,8 @@ const UserLogin = async(username , password)=>{
         const token =localStorage.setItem("x-auth-token" , response.data.token);
         const userdata=await response.data.token;
         
-       Navigate('/home');
-        alert("Login successfull");
+      //  Navigate('/home');
+      //   alert("Login successfull");
         
       } catch (error) {
         console.log(error.message)
@@ -84,7 +69,7 @@ const UserLogout = async()=>{
   
     try {
       res.cookie("jwt" ,"" ,{maxAge:1});
-      res.status(200).json({message:"user logout sucessfully"});
+      res.status(200).json({error:"user logout sucessfully"});
    
     } catch (error) {
        res.status(500).json({message:err.message});

@@ -11,6 +11,7 @@ import Home from '../Pages/Home'
 import { useRecoilValue } from "recoil"
 import userScreenAtom from "../atoms/userAtom"
 import Logout from "../Components/Logout"
+import { Navigate } from "react-router-dom"
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
       
      <Route path='/auth' element={<Auth/>} />
      <Route path='/logout' element={<Logout/>} />
-     <Route path='/' element={ user ? <Home/>  : navigate ('/auth') } />
+     <Route path='/' element={ user ? <Home/>  : <Navigate to = {'/auth'} /> } />
      <Route path='/home' element={ <Home/>}/>
      <Route path='/user' element={<Userpage/>} />
       <Route index='/:username' element={<Userpage/>} />

@@ -35,28 +35,21 @@ export default function SignupCard() {
 
   const handleLogin = async () => {
     try {
-      await UserLogin(username, password);
+      const login= await UserLogin(username, password);
 
       localStorage.setItem('isLoggedIn', 'true');
-      navigate('/home')
+      
+        navigate('/home')
+      
     
-      // setTimeout(() => {
-      //   navigate('/home');
-      // }, 100);
+      
     } catch (error) {
       console.error('Login failed:', error);
       
     }
   };
 
-  // useEffect(() => {
-    
-  //   const loggedIn = localStorage.getItem('isLoggedIn');
-  //   if (loggedIn) {
-     
-  //     navigate('/home');
-  //   }
-  // }, [navigate]);
+  
 
   return (
     <Flex minH={'40vh'} align={'center'} justify={'center'}>

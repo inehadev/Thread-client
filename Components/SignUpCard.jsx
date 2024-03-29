@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil'
 import authScreenAtom from '../atoms/authAtom'
 import axios from 'axios'
 import { AuthContext } from '../src/Context/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 
 
@@ -27,12 +27,9 @@ export default function SignupCard() {
     try {
       
 
+     
       await UserRegister(name , username, email , password);
-      console.log(res.data);
-      
-       navigate('/auth');
-
-
+     navigate('/auth')
     } catch (error) {
       console.log(error);
       
