@@ -21,7 +21,7 @@ const Logout =()=>{
            console.log(error) 
         }
     }
-    navigate('/auth')
+    
     return (
         <Button position={"fixed"} top={"30px"} size={"sm"} onClick={handlelogout}>
             Logout

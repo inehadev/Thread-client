@@ -12,11 +12,12 @@ import { useRecoilValue } from "recoil"
 import userScreenAtom from "../atoms/userAtom"
 import Logout from "../Components/Logout"
 import { Navigate } from "react-router-dom"
+import UpadateProfilePage from "../Pages/UpdataProfilePage"
 
 
 function App() {
-  const navigate = useNavigate();
  const user = useRecoilValue(userScreenAtom);
+ console.log(user);
 
  
 
@@ -27,11 +28,12 @@ function App() {
      <Routes>
 
       
-     <Route path='/auth' element={<Auth/>} />
-     <Route path='/logout' element={<Logout/>} />
-     <Route path='/' element={ user ? <Home/>  : <Navigate to = {'/auth'} /> } />
-     <Route path='/home' element={ <Home/>}/>
-     <Route path='/user' element={<Userpage/>} />
+     
+     
+     <Route path='/' element={ user ? <Home/>  :<Navigate to = '/auth' /> } />
+     <Route path='/auth' element={!user ? <Auth/>: <Navigate to ='/'/>} />
+     <Route path='/logout' element={ user ? <Logout/>:<Navigate to = '/auth'/>} />
+     <Route path='/update' elsement={user ? <UpadateProfilePage/> : <Navigate to = '/auth'/>}/>
       <Route index='/:username' element={<Userpage/>} />
       <Route path='/:username/post/:pid' element={<Postpage/>} />
      </Routes>

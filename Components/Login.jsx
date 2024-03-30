@@ -36,9 +36,7 @@ export default function SignupCard() {
   const handleLogin = async () => {
     try {
       const login= await UserLogin(username, password);
-
-      localStorage.setItem('isLoggedIn', 'true');
-      
+     alert("user login successfully");
         navigate('/home')
       
     

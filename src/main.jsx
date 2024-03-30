@@ -34,15 +34,17 @@ const theme = extendTheme ({config , styles , color})
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     
-    <RecoilRoot>
+    
     <BrowserRouter>
    <ChakraProvider theme = {theme}>
     <ColorModeScript initialColorMode={theme.config.initialColorMode } />
     <AuthProvider>
+    <RecoilRoot>
    <App />
+   </RecoilRoot>
    </AuthProvider>
     </ChakraProvider>
     </BrowserRouter>
-    </RecoilRoot>
+   
      </React.StrictMode>,
 )
