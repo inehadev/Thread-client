@@ -15,8 +15,9 @@ import { Navigate } from "react-router-dom"
 import UpadateProfilePage from "../Pages/UpdataProfilePage"
 
 
+
 function App() {
- const user = useRecoilValue(userScreenAtom);
+  const user = useRecoilValue(userScreenAtom);
  console.log(user);
 
  
@@ -32,10 +33,15 @@ function App() {
      
      <Route path='/' element={ user ? <Home/>  :<Navigate to = '/auth' /> } />
      <Route path='/auth' element={!user ? <Auth/>: <Navigate to ='/'/>} />
-     <Route path='/logout' element={ user ? <Logout/>:<Navigate to = '/auth'/>} />
-     <Route path='/update' elsement={user ? <UpadateProfilePage/> : <Navigate to = '/auth'/>}/>
+     <Route path='/logout' element={ user ? <Logout/> : <Navigate to = '/auth'/>} />
+     <Route path='/update' element={user ? <UpadateProfilePage/> : <Navigate to = '/auth'/>}/>
       <Route index='/:username' element={<Userpage/>} />
       <Route path='/:username/post/:pid' element={<Postpage/>} />
+    
+
+      
+     
+
      </Routes>
      </Container>
     </>

@@ -11,7 +11,7 @@ import authScreenAtom from "../atoms/authAtom";
     return(
 
         <>
-        {authScreenState ==="login" ?  <Login/> : <SignupCard/> }
+        {authScreenState ==='login' ?  <Login/> : <SignupCard/> }
       
         </>
     )

@@ -16,6 +16,7 @@ const Logout =()=>{
           console.log("user logout successfully")
           localStorage.removeItem("x-auth-token");
           setuser(null);
+          navigate('/')
           
         } catch (error) {
            console.log(error) 

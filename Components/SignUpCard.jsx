@@ -29,7 +29,7 @@ export default function SignupCard() {
 
      
       await UserRegister(name , username, email , password);
-     navigate('/auth')
+     navigate('/')
     } catch (error) {
       console.log(error);
       

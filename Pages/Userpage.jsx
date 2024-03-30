@@ -1,9 +1,6 @@
 import React from "react";
 import UserHeader from "../Components/UserHeader";
 import UserPost from "../Components/UserPost";
-import Home from "./Home";
-import { useRecoilValue } from "recoil"
-import { Navigate } from "react-router-dom";
 export default function Userpage (){
   
     return(

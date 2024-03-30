@@ -52,12 +52,15 @@ const UserLogin = async(username , password)=>{
         const response= await axios.post('http://localhost:5000/login' ,bodyParameter , axiosheader);
         console.log(response);
         console.log(response.data);
-        const token =localStorage.setItem("x-auth-token" , response.data.token);
-        console.log(token);
+        localStorage.setItem("x-auth-token", response.data.token);
+
+        // Log the token after setting it
+        console.log(localStorage.getItem("x-auth-token"));
         
       } catch (error) {
         console.log(error)
         
+
       }
 }
 

@@ -1,5 +1,4 @@
 
-
 import { atom } from "recoil";
 const storedToken = localStorage.getItem("x-auht-token");
 
