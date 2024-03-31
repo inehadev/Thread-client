@@ -1,7 +1,9 @@
-import react from 'react';
+import react, { useEffect } from 'react';
 
 const Home = ()=>{
-    console.log(localStorage.getItem("x-auth-token"))
+    useEffect(()=>{
+        alert("this is working fine")
+    } , []);
     return(
         <div>heeelo its a home page
             </div>

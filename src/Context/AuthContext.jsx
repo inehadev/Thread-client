@@ -45,17 +45,19 @@ const UserLogin = async(username , password)=>{
           password:password
         })
   
-        const axiosheader= {
-          "Accept":"application/json"
-        }
-  
+        const axiosheader = {
+          headers:{
+              "Accept":"application/json",
+          }
+      } 
+
+      
         const response= await axios.post('http://localhost:5000/login' ,bodyParameter , axiosheader);
         console.log(response);
         console.log(response.data);
-        localStorage.setItem("x-auth-token", response.data.token);
-
-        // Log the token after setting it
+        localStorage.setItem("x-auth-token", response.data);
         console.log(localStorage.getItem("x-auth-token"));
+
         
       } catch (error) {
         console.log(error)
@@ -83,6 +85,30 @@ const UserLogout = async()=>{
       console.log(error)
     }
 
+}
+
+const  UserUpdate= async()=>{
+  try {
+    const bodyparameter =({
+      name:name,
+      username:username,
+      email:email,
+      bio:bio,
+      password:password,
+
+
+    })
+
+    const axiosheader = {
+      headers:{
+          "Accept":"application/json",
+      }
+  } 
+   
+  const res= await axios.post()
+  } catch (error) {
+    console.log(error)
+  }
 }
 return <AuthContext.Provider value={{UserRegister , UserLogin, UserLogout }} >{children}</AuthContext.Provider>
 

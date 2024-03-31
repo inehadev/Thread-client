@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import UserHeader from "../Components/UserHeader";
 import UserPost from "../Components/UserPost";
 export default function Userpage (){
