@@ -8,7 +8,8 @@ console.log("Stored Token:", storedToken);
 const userScreenAtom = atom({
 
     key: "userAtom",
-    default:(storedToken) || null,
+    default:JSON.parse
+    (storedToken) || null,
 });
 
 

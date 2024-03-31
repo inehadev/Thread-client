@@ -53,10 +53,15 @@ const UserLogin = async(username , password)=>{
 
       
         const response= await axios.post('http://localhost:5000/login' ,bodyParameter , axiosheader);
-        console.log(response);
-        console.log(response.data);
-        localStorage.setItem("x-auth-token", response.data);
-        console.log(localStorage.getItem("x-auth-token"));
+        
+        if (response.status === 200) {
+          localStorage.setItem("x-auth-token",  JSON.stringify(response.data));
+          console.log(localStorage.getItem("x-auth-token"));
+         
+      } else {
+         
+          console.error("Login failed:", response.statusText);
+      }
 
         
       } catch (error) {

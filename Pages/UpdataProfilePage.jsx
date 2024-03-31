@@ -25,10 +25,10 @@ export default function UpadateProfilePage() {
   const [inputs ,setinputs]=useState({
     name:user.name,
     username:user.username,
-    email:'',
-    bio:'',
-    password:'',
-    ProfilePic:''
+    email:user.email,
+    bio:user.bio,
+    password:user.password,
+    ProfilePic:user.ProfilePic
   })
   console.log(inputs);
 
