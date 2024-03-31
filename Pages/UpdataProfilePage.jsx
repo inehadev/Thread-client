@@ -16,9 +16,11 @@ import {
   Center,
 } from '@chakra-ui/react'
 import { SmallCloseIcon } from '@chakra-ui/icons'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import userScreenAtom from '../atoms/userAtom'
+import usePreviewImage from '../Hooks/usePreviewImage'
+
 
 export default function UpadateProfilePage() {
   const [user,setuser]= useRecoilState(userScreenAtom);
@@ -27,10 +29,11 @@ export default function UpadateProfilePage() {
     username:user.username,
     email:user.email,
     bio:user.bio,
-    password:user.password,
+    password:"",
     ProfilePic:user.ProfilePic
   })
-  console.log(inputs);
+ const fileref=useRef(null)
+ const {handleImageChange}=usePreviewImage();
 
   const handleUpdate = ()=>{
 
@@ -57,11 +60,18 @@ export default function UpadateProfilePage() {
           <FormLabel>User Icon</FormLabel>
           <Stack direction={['column', 'row']} spacing={6}>
             <Center>
-              <Avatar size="xl" src="" />
+              <Avatar size="xl" src={user.ProfilePic} />
       
             </Center>
             <Center w="full">
-              <Button w="full">Change Avtar</Button>
+              <Button w="full" onClick={()=>fileref.current.click()}>Change Avtar</Button>
+              <Input
+            type="file"
+            value={inputs.ProfilePic} 
+             hidden
+              ref={fileref}
+            onChange={(e)=>handleImageChange(e)}
+          />
             </Center>
           </Stack>
         </FormControl>
@@ -71,6 +81,7 @@ export default function UpadateProfilePage() {
             placeholder="Enter Your name"
             _placeholder={{ color: 'gray.500' }}
             type="text"
+            value={inputs.name}
             onChange={(e)=>setinputs({...inputs , name:e.target.value})}
           />
           </FormControl>
@@ -78,6 +89,7 @@ export default function UpadateProfilePage() {
           <FormLabel>User name</FormLabel>
           <Input
             placeholder="UserName"
+            value={inputs.username}
             _placeholder={{ color: 'gray.500' }}
             type="text"     onChange={(e)=>setinputs({...inputs , username:e.target.value})}
 
@@ -89,6 +101,7 @@ export default function UpadateProfilePage() {
             placeholder="your-email@example.com"
             _placeholder={{ color: 'gray.500' }}
             type="email"
+            value={inputs.email}
             onChange={(e)=>setinputs({...inputs , email:e.target.value})}
           />
         </FormControl>
@@ -99,6 +112,7 @@ export default function UpadateProfilePage() {
             placeholder="Bio"
             _placeholder={{ color: 'gray.500' }}
             type="text"
+            value={inputs.bio}
             onChange={(e)=>setinputs({...inputs ,bio:e.target.value})}
           />
         </FormControl>
@@ -108,7 +122,8 @@ export default function UpadateProfilePage() {
             placeholder="password"
             _placeholder={{ color: 'gray.500' }}
             type="password"
-            onChange={(e)=>setinputs(...password)}
+            value={inputs.password}
+            onChange={(e)=>setinputs({...inputs,password:e.target.value})}
           />
         </FormControl>
         <Stack spacing={6} direction={['column', 'row']}>
