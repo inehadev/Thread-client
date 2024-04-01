@@ -33,7 +33,7 @@ export default function UpadateProfilePage() {
     ProfilePic:user.ProfilePic
   })
  const fileref=useRef(null)
- const {handleImageChange}=usePreviewImage();
+ const {handleImageChange ,imageurl}=usePreviewImage();
 
   const handleUpdate = ()=>{
 
@@ -60,14 +60,14 @@ export default function UpadateProfilePage() {
           <FormLabel>User Icon</FormLabel>
           <Stack direction={['column', 'row']} spacing={6}>
             <Center>
-              <Avatar size="xl" src={user.ProfilePic} />
+              <Avatar size="xl" src={ imageurl || user.ProfilePic} />
       
             </Center>
             <Center w="full">
               <Button w="full" onClick={()=>fileref.current.click()}>Change Avtar</Button>
               <Input
             type="file"
-            value={inputs.ProfilePic} 
+             
              hidden
               ref={fileref}
             onChange={(e)=>handleImageChange(e)}
