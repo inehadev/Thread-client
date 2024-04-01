@@ -16,14 +16,16 @@ import {
   Center,
 } from '@chakra-ui/react'
 import { SmallCloseIcon } from '@chakra-ui/icons'
-import { useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import userScreenAtom from '../atoms/userAtom'
 import usePreviewImage from '../Hooks/usePreviewImage'
+import { AuthContext } from '../src/Context/AuthContext'
 
 
 export default function UpadateProfilePage() {
   const [user,setuser]= useRecoilState(userScreenAtom);
+  const {UserUpdate}=useContext(AuthContext)
   const [inputs ,setinputs]=useState({
     name:user.name,
     username:user.username,
@@ -35,11 +37,24 @@ export default function UpadateProfilePage() {
  const fileref=useRef(null)
  const {handleImageChange ,imageurl}=usePreviewImage();
 
-  const handleUpdate = ()=>{
+  const handleUpdate = (e)=>{
+    e.preventDefault();
+
+    try {
+      UserUpdate(inputs);
+    } catch (error) {
+      console.log(error);
+      
+    }
+    
+    
 
   }
   return (
+    
+ 
     <Flex
+       
       minH={'100vh'}
       align={'center'}
       justify={'center'}
@@ -75,7 +90,7 @@ export default function UpadateProfilePage() {
             </Center>
           </Stack>
         </FormControl>
-        <FormControl  isRequired>
+        <FormControl >
           <FormLabel>Full Name</FormLabel>
           <Input
             placeholder="Enter Your name"
@@ -85,7 +100,7 @@ export default function UpadateProfilePage() {
             onChange={(e)=>setinputs({...inputs , name:e.target.value})}
           />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl >
           <FormLabel>User name</FormLabel>
           <Input
             placeholder="UserName"
@@ -95,7 +110,7 @@ export default function UpadateProfilePage() {
 
           />
         </FormControl>
-        <FormControl  isRequired>
+        <FormControl>
           <FormLabel>Email address</FormLabel>
           <Input
             placeholder="your-email@example.com"
@@ -106,7 +121,7 @@ export default function UpadateProfilePage() {
           />
         </FormControl>
 
-        <FormControl  isRequired>
+        <FormControl  >
           <FormLabel>Bio</FormLabel>
           <Input
             placeholder="Bio"
@@ -116,7 +131,7 @@ export default function UpadateProfilePage() {
             onChange={(e)=>setinputs({...inputs ,bio:e.target.value})}
           />
         </FormControl>
-        <FormControl  isRequired>
+        <FormControl  >
           <FormLabel>Password</FormLabel>
           <Input
             placeholder="password"
@@ -142,11 +157,15 @@ export default function UpadateProfilePage() {
             w="full"
             _hover={{
               bg: 'blue.500',
-            }}>
+            }}
+             onClick={handleUpdate}
+            >
             Submit
           </Button>
         </Stack>
       </Stack>
+      
     </Flex>
+    
   )
 }

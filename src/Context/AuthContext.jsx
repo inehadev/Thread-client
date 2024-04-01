@@ -93,7 +93,7 @@ const UserLogout = async()=>{
 
 }
 
-const  UserUpdate= async()=>{
+const  UserUpdate= async(name, username, email, bio, password, profilepic,user ,  user_id)=>{
   try {
     const bodyparameter =({
       name:name,
@@ -101,6 +101,7 @@ const  UserUpdate= async()=>{
       email:email,
       bio:bio,
       password:password,
+      profilepic:profilepic
 
 
     })
@@ -110,13 +111,17 @@ const  UserUpdate= async()=>{
           "Accept":"application/json",
       }
   } 
+
+  
    
-  const res= await axios.post()
+  const res= await axios.put(`http://localhost:5000/update/${user._id}` , bodyparameter , axiosheader);
+  console.log(res.data);
+
   } catch (error) {
     console.log(error)
   }
 }
-return <AuthContext.Provider value={{UserRegister , UserLogin, UserLogout }} >{children}</AuthContext.Provider>
+return <AuthContext.Provider value={{UserRegister , UserLogin, UserLogout , UserUpdate }} >{children}</AuthContext.Provider>
 
 }
 
