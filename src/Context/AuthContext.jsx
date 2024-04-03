@@ -93,35 +93,65 @@ const UserLogout = async()=>{
 
 }
 
-const  UserUpdate= async(name, username, email, bio, password, profilepic,user ,  user_id)=>{
-  try {
-    const bodyparameter =({
-      name:name,
-      username:username,
-      email:email,
-      bio:bio,
-      password:password,
-      profilepic:profilepic
+// const  UserUpdate= async(name, username, email, bio, password, profilepic,user )=>{
+//   try {
+//     if (!user || !user._id) {
+//       console.log("User object or user._id is undefined.");
+//       return;
+//     }
+
+//     const bodyparameter =({
+//       name:name,
+//       username:username,
+//       email:email,
+//       bio:bio,
+//       password:password,
+//       profilepic:profilepic
 
 
-    })
+//     })
 
-    const axiosheader = {
-      headers:{
-          "Accept":"application/json",
-      }
-  } 
+//     const axiosheader = {
+//       headers:{
+//           "Accept":"application/json",
+//       }
+//   } 
 
   
    
-  const res= await axios.put(`http://localhost:5000/update/${user._id}` , bodyparameter , axiosheader);
-  console.log(res.data);
+//   const res= await axios.put(`http://localhost:5000/update/${user._id}` , bodyparameter , axiosheader);
+//   console.log(res.data);
 
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
+
+
+// Assuming you have Axios imported and ready to use
+
+// Update user profile
+const updateUserProfile = async (userId, name, username, email, password, bio, profilepic) => {
+  try {
+    const response = await axios.put(`/api/update/${userId}`, { name, username, email, password, bio, profilepic });
+    return response.data;
   } catch (error) {
-    console.log(error)
+    console.error('Error updating user profile:', error);
+    throw new Error('Failed to update user profile');
   }
+
+
+// Example usage:
+const userId = 'user_id'; // Your logged-in user's ID
+try {
+  const updatedProfile = await updateUserProfile(userId, 'New Name', 'new_username', 'new@example.com', 'newpassword', 'New bio', 'profile_pic_url');
+  console.log('Updated profile:', updatedProfile);
+} catch (error) {
+  console.error('Error updating user profile:', error);
 }
-return <AuthContext.Provider value={{UserRegister , UserLogin, UserLogout , UserUpdate }} >{children}</AuthContext.Provider>
+
+return <AuthContext.Provider value={{UserRegister , UserLogin, UserLogout , updateUserProfile }} >{children}</AuthContext.Provider>
 
 }
 

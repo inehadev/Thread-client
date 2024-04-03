@@ -25,7 +25,7 @@ import { AuthContext } from '../src/Context/AuthContext'
 
 export default function UpadateProfilePage() {
   const [user,setuser]= useRecoilState(userScreenAtom);
-  const {UserUpdate}=useContext(AuthContext)
+  const {updateUserProfile}=useContext(AuthContext)
   const [inputs ,setinputs]=useState({
     name:user.name,
     username:user.username,
@@ -41,7 +41,7 @@ export default function UpadateProfilePage() {
     e.preventDefault();
 
     try {
-      UserUpdate(inputs);
+      updateUserProfile(inputs);
     } catch (error) {
       console.log(error);
       
