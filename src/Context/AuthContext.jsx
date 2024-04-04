@@ -10,7 +10,7 @@ const AuthContext= createContext();
 
 const AuthProvider = ({children})=>{
   const toast = useToast();
-  const Navigate= useNavigate();
+  const navigate= useNavigate();
 
 const UserRegister =  async(name , username , email , password)=>{
   
@@ -57,6 +57,8 @@ const UserLogin = async(username , password)=>{
         if (response.status === 200) {
           localStorage.setItem("x-auth-token",  JSON.stringify(response.data));
           console.log(localStorage.getItem("x-auth-token"));
+          navigate('/');
+      
          
       } else {
          
@@ -93,13 +95,9 @@ const UserLogout = async()=>{
 
 }
 
-const  UserUpdate= async(name, username, email, bio, password, profilepic ,userId )=>{
+const  UserUpdate= async(name, username, email, bio, password, profilepic )=>{
   try {
-
-    if (!userId) {
-      console.error("User ID is undefined.");
-      return;
-    }
+  
 
     const bodyparameter =({
       name:name,
@@ -107,7 +105,7 @@ const  UserUpdate= async(name, username, email, bio, password, profilepic ,userI
       email:email,
       bio:bio,
       password:password,
-      profilepic:profilepic
+      profilepic:imageurl
 
 
     })
@@ -120,8 +118,8 @@ const  UserUpdate= async(name, username, email, bio, password, profilepic ,userI
 
   
    
-  const response = await axios.put(`/api/update/${userId}`, { name, username, email, password, bio, profilepic } ,axiosheader , bodyparameter);
-  console.log(res.data);
+  const response = await axios.put(`/api/update/${user._id}` ,axiosheader , bodyparameter);
+  console.log(response);
 
   } catch (error) {
     console.log(error.response)

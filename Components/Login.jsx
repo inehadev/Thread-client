@@ -37,7 +37,7 @@ export default function SignupCard() {
     try {
       const login= await UserLogin(username, password);
      alert("user login successfully");
-        navigate('/home')
+       
       
     
       

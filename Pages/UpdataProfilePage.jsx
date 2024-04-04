@@ -21,6 +21,7 @@ import { useRecoilState } from 'recoil'
 import userScreenAtom from '../atoms/userAtom'
 import usePreviewImage from '../Hooks/usePreviewImage'
 import { AuthContext } from '../src/Context/AuthContext'
+import axios  from "axios";
 
 
 export default function UpadateProfilePage() {
@@ -37,19 +38,43 @@ export default function UpadateProfilePage() {
  const fileref=useRef(null)
  const {handleImageChange ,imageurl}=usePreviewImage();
 
-  const handleUpdate = (e)=>{
-    e.preventDefault();
+ 
+ const handleUpdate = async (e) => {
+  e.preventDefault();
+  
+//   try {
+//     const res = await fetch(`/update/${user._id}`, {
+//       method: "PUT",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ ...inputs, profilePic: imageurl }),
+//     });
+//     if (res.ok) {
+//       const data = await res.json(); // updated user object
+//       console.log(data);
+//       setuser(data);
+//       localStorage.setItem("user-threads", JSON.stringify(data));
+//   } else {
+//       throw new Error('Response not okay');
+//   }
+// }
+//   catch(error){
+//     console.log(error)
+//   }
 
-    try {
-      UserUpdate(inputs);
-    } catch (error) {
-      console.log(error);
-      
-    }
-    
-    
-
+  try {
+      const res = await axios.put(`/update/${user._id}`, inputs);
+      console.log(res.data);
+      // Optionally handle success message or redirect
+  } catch (err) {
+      console.error(err);
+      // Optionally handle error message
   }
+
+
+
+};
   return (
     
  
