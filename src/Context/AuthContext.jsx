@@ -3,7 +3,8 @@ import { createContext} from "react";
 import axios, { AxiosHeaders } from "axios";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-
+import { useRecoilState } from 'recoil'
+// import userScreenAtom from '.'
 
 const AuthContext= createContext();
 
@@ -97,9 +98,16 @@ const UserLogout = async()=>{
 
 const  UserUpdate= async(name, username, email, bio, password, profilepic )=>{
   try {
-  
+    const token = localStorage.getItem('x-auth-token'); 
+    const [user,setuser]= useRecoilState(userScreenAtom);
+    const userId=user.userId;
+
+    
+    
+    console.log("User ID:", userId);
 
     const bodyparameter =({
+      userId:userId,
       name:name,
       username:username,
       email:email,
@@ -113,6 +121,7 @@ const  UserUpdate= async(name, username, email, bio, password, profilepic )=>{
     const axiosheader = {
       headers:{
           "Accept":"application/json",
+          "Authorization": `Bearer ${token}`
       }
   } 
 
