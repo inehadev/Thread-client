@@ -2,8 +2,9 @@ import React from "react";
 import { createContext} from "react";
 import axios, { AxiosHeaders } from "axios";
 import { useToast } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState } from 'recoil'
+import userScreenAtom from "../../atoms/userAtom";
 // import userScreenAtom from '.'
 
 const AuthContext= createContext();
@@ -121,13 +122,13 @@ const  UserUpdate= async(name, username, email, bio, password, profilepic )=>{
     const axiosheader = {
       headers:{
           "Accept":"application/json",
-          "Authorization": `Bearer ${token}`
-      }
+        
+      }  
   } 
 
   
    
-  const response = await axios.put(`/api/update/${user._id}` ,axiosheader , bodyparameter);
+  const response = await axios.put(`/api/update/:${user._id}` ,axiosheader , bodyparameter);
   console.log(response);
 
   } catch (error) {
@@ -136,8 +137,32 @@ const  UserUpdate= async(name, username, email, bio, password, profilepic )=>{
 }
 
 
+///api to get user profile
 
-return <AuthContext.Provider value={{UserRegister , UserLogin, UserLogout , UserUpdate }} >{children}</AuthContext.Provider>
+ const GetUser = async ()=>{
+  try{
+    const username = useSearchParams();
+     const bodyparameter = {
+
+     }
+     const axiosheader = {
+      headers:{
+          "Accept":"application/json",
+        
+      }  
+  } 
+
+  const res = await axios.get('/profile/username' , bodyparameter , axiosheader);
+  console.log(res);
+ }catch(error){
+  console.log(error);
+ }
+
+     
+ }
+
+
+return <AuthContext.Provider value={{UserRegister , UserLogin, UserLogout , UserUpdate  , GetUser}} >{children}</AuthContext.Provider>
 
 }
 

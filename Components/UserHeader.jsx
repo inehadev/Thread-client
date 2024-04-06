@@ -4,7 +4,7 @@ import { CgMoreO } from "react-icons/cg";
 
 import React from "react";
 
-export default function UserHeader (){
+export default function UserHeader ({user}){
     
 	const toast = useToast();
     const copyURL =()=>{

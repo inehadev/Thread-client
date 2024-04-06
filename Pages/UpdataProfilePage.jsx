@@ -42,12 +42,41 @@ export default function UpadateProfilePage() {
  const handleUpdate = async (e) => {
   e.preventDefault();
  
-   try {
-    UserUpdate(inputs)
-   } catch (error) {
-    console.log(error)
-   }
+  //  try {
+  //   UserUpdate(inputs)
+  //  } catch (error) {
+  //   console.log(error)
+  //  }
 
+
+  try {
+    const res = await fetch(`/update/${user._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...inputs, profilePic: imageurl }),
+    });
+
+    if (!res.ok) {
+      console.log("Eerror:", res.statusText);
+      return;
+  }
+
+    const data = await res.json(); // updated user object
+    if (data.error) {
+     console.log("error in data")
+      return;
+    }
+  
+    console.log( "Profile updated successfully")
+    localStorage.setItem("user-threads", JSON.stringify(data));
+  } catch (error) {
+    // showToast("Error", error, "error");
+    console.log(error)
+  } finally {
+    // setUpdating(false);
+  }
 
 };
   return (
