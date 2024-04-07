@@ -26,23 +26,23 @@ export default function UserHeader ({user}){
     <Flex justifyContent={ "space-between"} w={"full"}>
        
     <Box>
-        <Text fontSize = {"2xl"} fontWeight={"bold"}>Mark Zuckerberg</Text>
+        <Text fontSize = {"2xl"} fontWeight={"bold"}>{user.name}</Text>
         <Flex gap={2} alignItems={"center"}>
-            <Text fontSize = {"sm"}>markzuckeberg</Text>
+            <Text fontSize = {"sm"}>{user.username}</Text>
             <Text fontSize = {"xs"} bg={"gray-dark"} color={"gray"} p={1} borderRadius={"full"}>threads.next</Text>
         </Flex>
     </Box>
 
     <Box>
     <Avatar
-    name="Mark Zuckerberg"
-    src="/zuck-avatar.png"
+    name={user.username}
+    src={user.ProfilePic}
     size={"xl"}
     />
     </Box>
 
     </Flex>
-    <Text>Co founder , executive chairman and CEO  of Meta platform</Text>
+    <Text>{user.bio}</Text>
     <Flex w={"full"} justifyContent={"space-between"}>
         <Flex gap={2} alignItems={"center"}>
             <Text color={"gray"}>3.2k followers</Text>

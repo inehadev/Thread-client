@@ -128,7 +128,7 @@ const  UserUpdate= async(name, username, email, bio, password, profilepic )=>{
 
   
    
-  const response = await axios.put(`/api/update/:${user._id}` ,axiosheader , bodyparameter);
+  const response = await axios.put(`http://localhost:5000/update/:${user._id}` ,axiosheader , bodyparameter);
   console.log(response);
 
   } catch (error) {

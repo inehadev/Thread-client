@@ -18,6 +18,7 @@ import {
 import { SmallCloseIcon } from '@chakra-ui/icons'
 import { useContext, useRef, useState } from 'react'
 import { useRecoilState } from 'recoil'
+import {useParams} from "react-router-dom"
 import userScreenAtom from '../atoms/userAtom'
 import usePreviewImage from '../Hooks/usePreviewImage'
 import { AuthContext } from '../src/Context/AuthContext'
@@ -27,6 +28,7 @@ import axios  from "axios";
 export default function UpadateProfilePage() {
   const [user,setuser]= useRecoilState(userScreenAtom);
   const {UserUpdate}=useContext(AuthContext)
+  
   const [inputs ,setinputs]=useState({
     name:user.name,
     username:user.username,
@@ -39,46 +41,47 @@ export default function UpadateProfilePage() {
  const {handleImageChange ,imageurl}=usePreviewImage();
 // console.log(imageurl);
  
- const handleUpdate = async (e) => {
-  e.preventDefault();
- 
-  //  try {
-  //   UserUpdate(inputs)
-  //  } catch (error) {
-  //   console.log(error)
-  //  }
 
 
+
+
+
+const  handleUpdate= async(name, username, email, bio, password, profilepic )=>{
   try {
-    const res = await fetch(`/update/${user._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...inputs, profilePic: imageurl }),
-    });
+ 
 
-    if (!res.ok) {
-      console.log("Eerror:", res.statusText);
-      return;
-  }
-
-    const data = await res.json(); // updated user object
-    if (data.error) {
-     console.log("error in data")
-      return;
-    }
+    const bodyparameter =({
   
-    console.log( "Profile updated successfully")
-    localStorage.setItem("user-threads", JSON.stringify(data));
-  } catch (error) {
-    // showToast("Error", error, "error");
-    console.log(error)
-  } finally {
-    // setUpdating(false);
-  }
+      name:inputs.name,
+      username:inputs.username,
+      email:inputs.email,
+      bio:inputs.bio,
+      password:password,
+      profilepic:inputs.imageurl
 
-};
+
+    })
+
+    const axiosheader = {
+      headers:{
+          "Accept":"application/json",
+        
+      }  
+  } 
+
+  
+   
+  const response = await axios.put(`http://localhost:5000/update/:${user._id}` ,axiosheader , bodyparameter);
+  console.log(response);
+
+  } catch (error) {
+    console.log(error.response)
+  }
+}
+
+
+
+
   return (
     
  
