@@ -13,7 +13,7 @@ export default function Userpage (){
   useEffect (()=>{
     const getuser = async()=>{
     try {
-      alert("getting data here you can call api here");
+     
       const res = await axios.get(`http://localhost:5000/profile/${username}`);
       if(res){
         setuser(res

@@ -1,11 +1,15 @@
-import { Avatar, Box, Flex, Link, Menu, MenuButton, MenuItem, MenuList, Portal, Text, VStack, useToast } from "@chakra-ui/react";
+import { Avatar, Box, Flex, Button, Link, Menu, MenuButton, MenuItem, MenuList, Portal, Text, VStack, useToast } from "@chakra-ui/react";
 import { BsInstagram } from 'react-icons/bs';
 import { CgMoreO } from "react-icons/cg";
 
-import React from "react";
+import React, { useState } from "react";
+import { useRecoilValue } from "recoil";
+import userScreenAtom from "../atoms/userAtom";
+import axios from 'axios'
 
 export default function UserHeader ({user}){
-    
+    const currentuser = useRecoilValue(userScreenAtom);
+    const [following , setfollowing] = useState(user.followers.includes(currentuser._id));
 	const toast = useToast();
     const copyURL =()=>{
     const currentURL = window.location.href;
@@ -20,6 +24,25 @@ export default function UserHeader ({user}){
     })
 
     }
+
+    const handlefollow = async()=>{
+
+        try{
+            console.log("working")
+        const bodyparameter = {};
+        const axiosheader = {
+            headers:{
+                "Accept":"application/json",
+              
+            }  
+        }
+            const res = await axios.post(`http://localhost:5000/follow/${user._id}`, bodyparameter , axiosheader);
+             console.log(res);
+            const data=await res.data();
+    }catch (error){
+        console.log(error)
+    }
+}
     return (
 
     <VStack gap={4} alignItems={"start"}>
@@ -34,18 +57,42 @@ export default function UserHeader ({user}){
     </Box>
 
     <Box>
-    <Avatar
-    name={user.username}
-    src={user.ProfilePic}
-    size={"xl"}
-    />
+    {user.profilepic &&(
+        <Avatar
+        name={user.username}
+        src={user.ProfilePic}
+        size={"xl"}
+        />
+    )}
+    {!user.profilepic &&(
+        <Avatar
+        name={user.username}
+        src={""}
+        size={"xl"}
+        />
+    )}
     </Box>
 
     </Flex>
     <Text>{user.bio}</Text>
+    {currentuser._id==user._id &&(
+       
+        <Link href="/update">
+            <Button size="md">Update Profile</Button>
+        
+        </Link>
+    )}
+
+{currentuser._id!=user._id &&(
+       
+    //    <Link href="/update">
+           <Button size="md" onClick={handlefollow}>{following ?"Unfollow" : "Follow"}</Button>
+       
+    //    </Link>
+   )}
     <Flex w={"full"} justifyContent={"space-between"}>
         <Flex gap={2} alignItems={"center"}>
-            <Text color={"gray"}>3.2k followers</Text>
+            <Text color={"gray"}>{user.followers.length} followers</Text>
             <Box w='1' h='1' bg={"gray"} borderRadius={"full"}></Box>
             <Link color={"gray"}>instagram.com</Link>
         </Flex>
