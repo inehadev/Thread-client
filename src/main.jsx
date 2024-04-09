@@ -8,6 +8,7 @@ import {BrowserRouter} from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 import { AuthProvider } from './Context/AuthContext.jsx'
 
+
 const styles = {
   global:(props)=>({
     body: {
@@ -40,7 +41,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ColorModeScript initialColorMode={theme.config.initialColorMode } />
     <AuthProvider>
     <RecoilRoot>
+   
    <App />
+   
    </RecoilRoot>
    </AuthProvider>
     </ChakraProvider>

@@ -11,6 +11,7 @@ import Home from '../Pages/Home'
 import { useRecoilValue } from "recoil"
 import userScreenAtom from "../atoms/userAtom"
 import Logout from "../Components/Logout"
+import CreatePost from "../Components/CreatePost"
 import { Navigate } from "react-router-dom"
 import UpadateProfilePage from "../Pages/UpdataProfilePage"
 
@@ -35,9 +36,11 @@ function App() {
       <Route path='/profile/:username' element={<Userpage/>} />
       <Route index='/' element={<Userpage/>} />
       <Route path='/:username/post/:pid' element={<Postpage/>} />
+     
     
 
-      
+      {/* {user && <Logout/>} */}
+      {/* {user && <CreatePost/>} */}
      
 
      </Routes>

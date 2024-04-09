@@ -46,16 +46,43 @@ export default function UserHeader ({user}){
 // }
 
 
-const handlefollow = async () => {
-    try {
-        const response = await axios.post(`http://localhost:5000/follow/${user._id}`);
-        console.log(response.data.message);
-        // Optionally, you can update the UI based on the response
-    } catch (error) {
-        console.error("Error:", error);
-        // Handle error gracefully
+
+
+const handlefollow= async () => {
+    if (!currentuser) {
+        console.log("Error", "Please login to follow", "error");
+       
+     
     }
+    console.log(currentuser.name)
+    try {
+        const res = await fetch(`http://localhost:5000/follow/${currentuser._id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await res.json();
+        if (data.error) {
+        console.log("Error", data.error, "error");
+            
+        }
+
+        if (following) {
+            console.log( `Unfollowed ${user.name}`, "success");
+            user.followers.pop(); // simulate removing from followers
+        } else {
+           console.log( `Followed ${user.name}`, "success");
+            user.followers.push(currentuser?._id); // simulate adding to followers
+        }
+        setfollowing(!following);
+
+        console.log(data);
+    } catch (error) {
+       console.log("error");
+    } 
 };
+
 
     return (
 

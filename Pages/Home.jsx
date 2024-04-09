@@ -1,12 +1,13 @@
 import react, { useEffect } from 'react';
+import CreatePost from '../Components/CreatePost';
 
 const Home = ()=>{
-    useEffect(()=>{
-        alert("this is working fine")
-    } , []);
+    
     return(
-        <div>heeelo its a home page
+        <div><CreatePost/>
+        
             </div>
+            
     )
 
 }
