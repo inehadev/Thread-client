@@ -59,6 +59,7 @@ const UserLogin = async(username , password)=>{
         if (response.status === 200) {
           localStorage.setItem("x-auth-token",  JSON.stringify(response.data));
           console.log(localStorage.getItem("x-auth-token"));
+          console.log(response.headers['set-cookie']);
           navigate('/');
       
          

@@ -25,24 +25,38 @@ export default function UserHeader ({user}){
 
     }
 
-    const handlefollow = async()=>{
-
-        try{
-            console.log("working")
-        const bodyparameter = {};
-        const axiosheader = {
-            headers:{
-                "Accept":"application/json",
+//     const handlefollow = async()=>{
+//          const  userId=user._id;
+//              console.log(userId)
+//         try{
+            
+//         const bodyparameter = {};
+//         const axiosheader = {
+//             headers:{
+//                 "Accept":"application/json",
               
-            }  
-        }
-            const res = await axios.post(`http://localhost:5000/follow/${user._id}`, bodyparameter , axiosheader);
-             console.log(res);
-            const data=await res.data();
-    }catch (error){
-        console.log(error)
+//             }  
+//         }
+//             const res = await axios.post(`http://localhost:5000/follow/${userId}`, bodyparameter , axiosheader);
+//              console.log(res);
+//             const data=await res.data();
+//     }catch (error){
+//         console.log(error)
+//     }
+// }
+
+
+const handlefollow = async () => {
+    try {
+        const response = await axios.post(`http://localhost:5000/follow/${user._id}`);
+        console.log(response.data.message);
+        // Optionally, you can update the UI based on the response
+    } catch (error) {
+        console.error("Error:", error);
+        // Handle error gracefully
     }
-}
+};
+
     return (
 
     <VStack gap={4} alignItems={"start"}>
