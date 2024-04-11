@@ -19,6 +19,6 @@ import React, { useState } from "react";
         console.log(imageurl);
 
     }
-    return{handleImageChange , imageurl}
+    return{handleImageChange , imageurl , setimageurl}
 }
 export  default usePreviewImage;
