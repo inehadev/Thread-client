@@ -58,6 +58,8 @@ const UserLogin = async(username , password)=>{
         
         if (response.status === 200) {
           localStorage.setItem("x-auth-token",  JSON.stringify(response.data));
+          localStorage.setItem("x-auth-user",  response.data.token);
+          
           console.log(localStorage.getItem("x-auth-token"));
           console.log(response.headers['set-cookie']);
           navigate('/');
@@ -85,8 +87,13 @@ const UserLogout = async()=>{
 
       })
 
+
+      const token= localStorage.getItem('x-auth-user');
       const header={
-        "Accept":"application/json"
+        "Accept":"application/json",
+        'x-auth-token':token
+        
+
       }
 
       const res= await axios.post("http://localhost:5000/logout" , header , bodyParameter);

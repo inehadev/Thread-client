@@ -41,9 +41,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ColorModeScript initialColorMode={theme.config.initialColorMode } />
     <AuthProvider>
     <RecoilRoot>
-   
    <App />
-   
    </RecoilRoot>
    </AuthProvider>
     </ChakraProvider>

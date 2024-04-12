@@ -61,17 +61,20 @@ const  handleUpdate= async(name, username, email, bio, password, profilepic )=>{
 
 
     })
+    const token= localStorage.getItem('x-auth-user');
+    console.log("this is the token data:" , token);
 
     const axiosheader = {
       headers:{
           "Accept":"application/json",
-        
+          'x-auth-token':token,
+          
       }  
   } 
 
   
    
-  const response = await axios.put(`http://localhost:5000/update/:${user._id}` ,axiosheader , bodyparameter);
+  const response = await axios.put(`http://localhost:5000/update/:${user._id}` ,bodyparameter , axiosheader);
   console.log(response);
 
   } catch (error) {

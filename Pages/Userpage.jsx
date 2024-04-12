@@ -15,6 +15,11 @@ export default function Userpage (){
     try {
      
       const res = await axios.get(`http://localhost:5000/profile/${username}`);
+      const data = await res.json();
+				if (data.error) {
+					showToast("Error", data.error, "error");
+					return;
+				}
       if(res){
         setuser(res
         .data);
