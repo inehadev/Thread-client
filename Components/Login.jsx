@@ -30,10 +30,13 @@ export default function SignupCard() {
   const setAuthScreenState = useSetRecoilState(authScreenAtom);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading , setloading]=useState(false);
   const { UserLogin } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    setloading(true);
     try {
       const login= await UserLogin(username, password);
      alert("user login successfully");
@@ -44,6 +47,8 @@ export default function SignupCard() {
     } catch (error) {
       console.error('Login failed:', error);
       
+    }finally{
+      setloading(false);
     }
   };
 
@@ -88,8 +93,10 @@ export default function SignupCard() {
                 color={'white'}
                 _hover={{ bg: useColorModeValue('gray.600', 'gray.700') }}
                 onClick={handleLogin}>
+                  isloading={loading}
                 Login
               </Button>
+
             </Stack>
             <Stack pt={6}>
               <Text align={'center'}>

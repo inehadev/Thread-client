@@ -4,18 +4,20 @@ import UserPost from "../Components/UserPost";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../src/Context/AuthContext";
 import axios from 'axios';
+import { Flex, Spinner } from "@chakra-ui/react";
 
 export default function Userpage (){
   const [user,setuser]=useState(null);
   const {username}=useParams();
   const [userProfile, setUserProfile] = useState(null);
+  const [loading ,setloading] = useState(true);
   // const Getuser= useContext(AuthContext);
   useEffect (()=>{
     const getuser = async()=>{
     try {
      
       const res = await axios.get(`http://localhost:5000/profile/${username}`);
-      const data = await res.json();
+      const data = await res.data;
 				if (data.error) {
 					showToast("Error", data.error, "error");
 					return;
@@ -28,14 +30,28 @@ export default function Userpage (){
         
     } catch (error) {
         console.log(error)
+    }finally{
+      setloading(false);
     }
     }
     getuser();
 
   } , [username])
 
-  if(!user) return null;
+  if(!user && loading) {
+    return(
+     <Flex justifyContent={'center'}>
+       <Spinner size={'xl'}/>
+     </Flex>
+    )
+  }
 
+  if(!user && !loading)
+{
+  return (
+    <h1>user not found</h1>
+  )
+}
   
 
     return(
