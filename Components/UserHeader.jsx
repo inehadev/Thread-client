@@ -25,29 +25,6 @@ export default function UserHeader ({user}){
 
     }
 
-//     const handlefollow = async()=>{
-//          const  userId=user._id;
-//              console.log(userId)
-//         try{
-            
-//         const bodyparameter = {};
-//         const axiosheader = {
-//             headers:{
-//                 "Accept":"application/json",
-              
-//             }  
-//         }
-//             const res = await axios.post(`http://localhost:5000/follow/${userId}`, bodyparameter , axiosheader);
-//              console.log(res);
-//             const data=await res.data();
-//     }catch (error){
-//         console.log(error)
-//     }
-// }
-
-
-
-
 const handlefollow= async () => {
     if (!currentuser) {
         console.log("Error", "Please login to follow", "error");
@@ -55,11 +32,13 @@ const handlefollow= async () => {
      
     }
     console.log(currentuser.name)
+    const token = localStorage.getItem("x-auth-user");
     try {
-        const res = await fetch(`http://localhost:5000/follow/${currentuser._id}`, {
+        const res = await fetch(`http://localhost:5000/follow/${user._id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "x-auth-token":token
                 
             },
         });
@@ -71,10 +50,10 @@ const handlefollow= async () => {
 
         if (following) {
             console.log( `Unfollowed ${user.name}`, "success");
-            user.followers.pop(); // simulate removing from followers
+            user.followers.pop(); 
         } else {
            console.log( `Followed ${user.name}`, "success");
-            user.followers.push(currentuser?._id); // simulate adding to followers
+            user.followers.push(currentuser?._id); 
         }
         setfollowing(!following);
 
