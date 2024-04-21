@@ -5,39 +5,54 @@ import { Button, Flex, Spinner } from '@chakra-ui/react';
 import Post from '../Components/Post';
 
 const Home = ()=>{
-    const [loading , setloading]=useState(true);
+    const [loading , setloading]=useState(false);
     const [posts, setPosts] = useState([]);
-    useEffect (()=>{
-        const getfeedpost =async()=>{
-            try {
-                const res = await fetch ('/:postid');
-                console.log(res);
+    // useEffect (()=>{
+    //     const getfeedpost =async()=>{
+    //         const token = localStorage.getItem("x-auth-user");
+    //         try {
+    //             const res = await fetch(`http://localhost:5000/getfeedpost`, {
+                   
+    //                 method: "GET",
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                     "x-auth-token":token
+                        
+    //                 },
+                   
+    //             });
+    //             const data = await res.json();
                 
-            } catch (error) {
-                console.log(error)
+    //             console.log(data);
+    //             setPosts(data);
+    //             if (data.error) {
+    //             console.log("Error", data.error, "error");
+                    
+    //         }}catch (error) {
+    //             console.log(error)
                 
-            }finally{
-                setloading(false);
-            }
+    //         }finally{
+    //             setloading(true);
+    //         }
 
-        }
-        getfeedpost();
+    //     }
+    //     getfeedpost();
 
-    } , [])
+    // } , [])
    
     
     return(
         <>
-        {/* <Link to={'/markzuckerberg'}>
+        <Link to={'/markzuckerberg'}>
         <Flex w={'full'} justifyContent={'center'} />
         <Button mx={"auto"}>visit profile page</Button>
         </Link>
 
-        {/* <div><CreatePost/>
+         <div><CreatePost/>
         
-            </div> */}
+            </div>
 
-
+{/* 
             {!loading && postMessage.length==0 && <h1>follow user to see posts</h1>}
             {loading && (
                 <Flex justify={'center'}>
@@ -48,7 +63,7 @@ const Home = ()=>{
             {posts.map((post)=>(
                 <Post key={post._id} post = {post} postedBy = {post.postedBy}/>
 
-            ))}
+            ))} */}
             </>   
     )
 

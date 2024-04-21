@@ -39,7 +39,7 @@ export default function UpadateProfilePage() {
   })
  const fileref=useRef(null)
  const {handleImageChange ,imageurl}=usePreviewImage();
-// console.log(imageurl);
+console.log(imageurl);
  
 
 
@@ -57,7 +57,7 @@ const  handleUpdate= async(name, username, email, bio, password, profilepic )=>{
       email:inputs.email,
       bio:inputs.bio,
       password:password,
-      profilepic:inputs.imageurl
+      profilepic: JSON.stringify(inputs.imageurl)
 
 
     })

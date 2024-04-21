@@ -46,12 +46,9 @@ export default function Userpage (){
     )
   }
 
-  if(!user && !loading)
-{
-  return (
-    <h1>user not found</h1>
-  )
-}
+  
+	if (!user && !loading) return <h1>User not found</h1>;
+
   
 
     return(
