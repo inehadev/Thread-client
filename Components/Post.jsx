@@ -6,17 +6,14 @@ import { useEffect } from 'react'
 import Action from './Action'
 import { useRecoilValue} from 'recoil'
 import userScreenAtom from '../atoms/userAtom'
+import { formatDistanceToNow } from 'date-fns';
 
 const Post = ({post , postedBy}) => {
-
-    
     const[liked, setliked] = useState(false);
     const currentUser = useRecoilValue(userScreenAtom);
     const [user , setuser]=useState(null);
-    console.log(currentUser);
    
     useEffect(() => {
-        console.log("this is value of posted by :" , postedBy);
 		const getUser = async () => {
 			try {
 				const res = await fetch("/profile/" + postedBy);
@@ -34,19 +31,19 @@ const Post = ({post , postedBy}) => {
 
 		getUser();
 	}, [postedBy]);
+	
   return (
     <>
-   
-  {/* <Link to={`/${user.username}/post/${post._id}`}> */}
+
 			<Flex gap={3} mb={4} py={5}>
 				<Flex flexDirection={"column"} alignItems={"center"}>
 					<Avatar
 						size='md'
-						name={user.name}
-						src={user?.profilePic}
+						name={currentUser.username}
+						src={currentUser?.profilePic}
 						onClick={(e) => {
 							e.preventDefault();
-							navigate(`/${user.username}`);
+							navigate(`/${currentUser.username}`);
 						}}
 					/>
 					<Box w='1px' h={"full"} bg='gray.light' my={2}></Box>
@@ -109,7 +106,7 @@ const Post = ({post , postedBy}) => {
 								{formatDistanceToNow(new Date(post.createdAt))} ago
 							</Text>
 
-							{currentUser?._id === user._id && <DeleteIcon size={20} onClick={handleDeletePost} />}
+							{/* {currentUser?._id === user._id && <DeleteIcon size={20} onClick={handleDeletePost} />} */}
 						</Flex>
 					</Flex>
 
@@ -125,7 +122,7 @@ const Post = ({post , postedBy}) => {
 					</Flex>
 				</Flex>
 			</Flex>
-		{/* </Link> */}
+		
         </>
 	)
 }
