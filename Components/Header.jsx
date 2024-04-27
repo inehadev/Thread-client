@@ -29,7 +29,7 @@ import {Link as RouterLink} from "react-router-dom"
 
       {user &&(
         <Link as = {RouterLink} to ={`/profile/${user.username}`}>
-        <RxAvatar size={24} />
+        <RxAvatar  size={24} />
       </Link>
       )}
 

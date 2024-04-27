@@ -81,7 +81,7 @@ const handlefollow= async () => {
     {user.profilepic &&(
         <Avatar
         name={user.username}
-        src={user.ProfilePic}
+        src={user.profilepic}
         size={"xl"}
         />
     )}
@@ -105,11 +105,9 @@ const handlefollow= async () => {
     )}
 
 {currentuser._id!=user._id &&(
-       
-    //    <Link href="/update">
+
            <Button size="md" onClick={handlefollow}>{following ?"Unfollow" : "Follow"}</Button>
-       
-    //    </Link>
+   
    )}
     <Flex w={"full"} justifyContent={"space-between"}>
         <Flex gap={2} alignItems={"center"}>

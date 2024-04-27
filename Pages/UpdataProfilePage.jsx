@@ -28,18 +28,20 @@ import axios  from "axios";
 export default function UpadateProfilePage() {
   const [user,setuser]= useRecoilState(userScreenAtom);
   const {UserUpdate}=useContext(AuthContext)
-  
-  const [inputs ,setinputs]=useState({
-    name:user.name,
-    username:user.username,
-    email:user.email,
-    bio:user.bio,
-    password:"",
-    ProfilePic:user.ProfilePic
-  })
+ 
  const fileref=useRef(null)
  const {handleImageChange ,imageurl}=usePreviewImage();
 console.log(imageurl);
+ 
+const [inputs ,setinputs]=useState({
+  name:user.name,
+  username:user.username,
+  email:user.email,
+  bio:user.bio,
+  password:"",
+ 
+
+})
  
 
 
@@ -50,33 +52,44 @@ const  handleUpdate= async(name, username, email, bio, password, profilepic )=>{
   try {
  
 
-    const bodyparameter =({
+  //   const bodyparameter =({
   
-      name:inputs.name,
-      username:inputs.username,
-      email:inputs.email,
-      bio:inputs.bio,
-      password:password,
-      profilepic: JSON.stringify(inputs.imageurl)
+  //     name:inputs.name,
+  //     username:inputs.username,
+  //     email:inputs.email,
+  //     bio:inputs.bio,
+  //     password:password,
+  //     profilepic: inputs.imageurl
 
 
-    })
-    const token= localStorage.getItem('x-auth-user');
-    console.log("this is the token data:" , token);
+  //   })
 
-    const axiosheader = {
-      headers:{
-          "Accept":"application/json",
-          'x-auth-token':token,
+  //   const token= localStorage.getItem('x-auth-user');
+  //   console.log("this is the token data:" , token);
+
+  //   const axiosheader = {
+  //     headers:{
+  //         "Accept":"application/json",
+  //         'x-auth-token':token,
           
-      }  
-  } 
+  //     }  
+  // } 
 
   
    
-  const response = await axios.put(`http://localhost:5000/update/:${user._id}` ,bodyparameter , axiosheader);
-  console.log(response);
+  // const response = await axios.put(`http://localhost:5000/update/:${user._id}` ,bodyparameter , axiosheader);
+  // console.log(response);
 
+
+ 
+    const res = await fetch(`http://localhost:5000/update/:${user._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...inputs, profilePic: imageurl }),
+    });
+    const data = await res.json(); 
   } catch (error) {
     console.log(error.response)
   }
