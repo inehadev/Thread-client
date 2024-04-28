@@ -29,12 +29,12 @@ function App() {
      <Container maxW="620px">
      <Header/>
      <Routes>
-     <Route path='/home' element={ user ? <Home/>  :<Navigate to = '/auth' /> } />
+     <Route path='/' element={ user ? <Home/>  :<Navigate to = '/auth' /> } />
      <Route path='/auth' element={!user ? <Auth/>: <Navigate to ='/'/>} />
      <Route path='/logout' element={ user ? <Logout/> : <Navigate to = '/auth'/>} />
      <Route path='/update/' element={user ? <UpadateProfilePage/> : <Navigate to = '/auth'/>}/>
       <Route path='/profile/:username' element={<Userpage/>} />
-      <Route index='/' element={<Userpage/>} />
+      {/* <Route index='/' element={<Userpage/>} /> */}
       <Route path='/:username/post/:pid' element={<Postpage/>} />
      
     
