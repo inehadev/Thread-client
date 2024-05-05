@@ -1,8 +1,9 @@
 import react, { useEffect  , useState} from 'react';
 import CreatePost from '../Components/CreatePost';
-import { Link } from 'react-router-dom';
+import { Link  } from 'react-router-dom';
 import { Button, Flex, Spinner } from '@chakra-ui/react';
 import Post from '../Components/Post';
+
 
 const Home = ()=>{
     const [loading , setloading]=useState(true);

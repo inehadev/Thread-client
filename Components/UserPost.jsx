@@ -1,10 +1,11 @@
 import { Box, Flex , Avatar , Text , Image } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsThreeDots } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import Action from './Action'
 const UserPost = ({postIMG , postTitle , likes , replies}) => {
-    const[liked, setliked] = useState(false);
+    // const[liked  , setliked]=useState(liked)
+ 
   return (
     <>
     <Link to={'/markzuckerberg/post/i'}>
@@ -74,7 +75,7 @@ const UserPost = ({postIMG , postTitle , likes , replies}) => {
                     </Box> )}
 
                 <Flex gap={3} my={1}>
-                 <Action liked={liked} setliked={setliked} />
+                 {/* <Action liked={liked} setliked={setliked} /> */}
                 </Flex>
 
                 <Flex  gap={3} alignItems={"center"}>

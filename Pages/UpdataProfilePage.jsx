@@ -16,7 +16,7 @@ import {
   Center,
 } from '@chakra-ui/react'
 import { SmallCloseIcon } from '@chakra-ui/icons'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useRef, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import {useParams} from "react-router-dom"
 import userScreenAtom from '../atoms/userAtom'
@@ -27,11 +27,11 @@ import axios  from "axios";
 
 export default function UpadateProfilePage() {
   const [user,setuser]= useRecoilState(userScreenAtom);
-  const {UserUpdate}=useContext(AuthContext)
+
  
  const fileref=useRef(null)
  const {handleImageChange ,imageurl}=usePreviewImage();
-console.log(imageurl);
+
  
 const [inputs ,setinputs]=useState({
   name:user.name,
@@ -39,57 +39,56 @@ const [inputs ,setinputs]=useState({
   email:user.email,
   bio:user.bio,
   password:"",
+  profilepic:""
  
-
 })
- 
 
-
-
-
+useEffect(() => {
+  setinputs(prevInputs => ({
+    ...prevInputs,
+    profilepic: imageurl
+  }));
+}, [imageurl]);
+console.log('imageurl:', imageurl); // Logging imageurl
+console.log('inputs.profilepic:', inputs.profilepic);
+console.log('Updating profile with:', inputs);
 
 const  handleUpdate= async(name, username, email, bio, password, profilepic )=>{
   try {
  
-
-  //   const bodyparameter =({
   
-  //     name:inputs.name,
-  //     username:inputs.username,
-  //     email:inputs.email,
-  //     bio:inputs.bio,
-  //     password:password,
-  //     profilepic: inputs.imageurl
+    const bodyparameter =({
+  
+      name:inputs.name,
+      username:inputs.username,
+      email:inputs.email,
+      bio:inputs.bio,
+      password:password,
+      profilepic: inputs.profilepic
 
 
-  //   })
+    })
+    // console.log(inputs.profilepic)
+    // console.log(inputs.email)
+   
 
-  //   const token= localStorage.getItem('x-auth-user');
-  //   console.log("this is the token data:" , token);
+    const token= localStorage.getItem('x-auth-user');
+    console.log("this is the token data:" , token);
 
-  //   const axiosheader = {
-  //     headers:{
-  //         "Accept":"application/json",
-  //         'x-auth-token':token,
+    const axiosheader = {
+      headers:{
+          "Accept":"application/json",
+          'x-auth-token':token,
           
-  //     }  
-  // } 
+      }  
+  } 
 
   
    
-  // const response = await axios.put(`http://localhost:5000/update/:${user._id}` ,bodyparameter , axiosheader);
-  // console.log(response);
+  const response = await axios.put(`http://localhost:5000/update/:${user._id}` ,bodyparameter , axiosheader);
+  console.log(response);
 
 
- 
-    const res = await fetch(`http://localhost:5000/update/:${user._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...inputs, profilePic: imageurl }),
-    });
-    const data = await res.json(); 
   } catch (error) {
     console.log(error.response)
   }
@@ -123,11 +122,11 @@ const  handleUpdate= async(name, username, email, bio, password, profilepic )=>{
           <FormLabel>User Icon</FormLabel>
           <Stack direction={['column', 'row']} spacing={6}>
             <Center>
-              <Avatar size="xl" src={ imageurl || user.ProfilePic} />
+              <Avatar size="xl" src={ imageurl || user.profilepic} />
       
             </Center>
             <Center w="full">
-              <Button w="full" onClick={()=>fileref.current.click()}>Change Avtar</Button>
+              <Button w="full" onClick={()=>fileref.current.click()} >Change Avtar</Button>
               <Input
             type="file"
              

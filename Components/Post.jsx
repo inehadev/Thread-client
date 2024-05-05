@@ -9,7 +9,7 @@ import userScreenAtom from '../atoms/userAtom'
 import { formatDistanceToNow } from 'date-fns';
 
 const Post = ({post , postedBy}) => {
-    const[liked, setliked] = useState(false);
+    
     const currentUser = useRecoilValue(userScreenAtom);
     const [user , setuser]=useState(null);
    
@@ -53,7 +53,7 @@ const Post = ({post , postedBy}) => {
 							<Avatar
 								size='xs'
 								name='John doe'
-								src={post.replies[0].userProfilePic}
+								src={post.replies[0].user.profilepic}
 								position={"absolute"}
 								top={"0px"}
 								left='15px'

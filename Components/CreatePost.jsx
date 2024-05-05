@@ -55,13 +55,8 @@ const CreatePost =()=>{
         }
     } 
       const res= await axios.post("http://localhost:5000/CreatePost" , bodyparameter , axiosheader)
-      // const data = await res.json();
       console.log(res);
-      // if(data.error){
-      //   console.log("error is there");
-      // }else{
-      //   console.log("Post created:", data);
-      // }
+     
 
     
     }
