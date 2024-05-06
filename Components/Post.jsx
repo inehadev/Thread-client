@@ -7,6 +7,7 @@ import Action from './Action'
 import { useRecoilValue} from 'recoil'
 import userScreenAtom from '../atoms/userAtom'
 import { formatDistanceToNow } from 'date-fns';
+import axios from 'axios';
 
 const Post = ({post , postedBy}) => {
     
@@ -15,22 +16,28 @@ const Post = ({post , postedBy}) => {
    
     useEffect(() => {
 		const getUser = async () => {
+		
 			try {
-				const res = await fetch("/profile/" + postedBy);
-				const data = await res.json();
-				if (data.error) {
-				console.log(error);
-					return;
-				}
+				console.log("nmste")
+				const res = await axios.get(`http://localhost:5000/profile/${user._id}`+postedBy);
+				const data = await res.data;
+				console.log(data)
+						  if (data.error) {
+							  showToast("Error", data.error, "error");
+							  return;
+						  }
 				setuser(data);
 			} catch (error) {
 			console.log(error);
 				setuser(null);
 			}
+
 		};
 
 		getUser();
 	}, [postedBy]);
+	console.log("user is" ,user)
+	console.log("currentUser is" , currentUser)
 	
   return (
     <>
@@ -39,8 +46,8 @@ const Post = ({post , postedBy}) => {
 				<Flex flexDirection={"column"} alignItems={"center"}>
 					<Avatar
 						size='md'
-						name={currentUser.username}
-						src={currentUser?.profilePic}
+						name={user?.username}
+						src={currentUser?.profilepic}
 						onClick={(e) => {
 							e.preventDefault();
 							navigate(`/${currentUser.username}`);
@@ -77,7 +84,7 @@ const Post = ({post , postedBy}) => {
 							<Avatar
 								size='xs'
 								name='John doe'
-								src={post.replies[2].userProfilePic}
+								src={post.replies[2].userprofilepic}
 								position={"absolute"}
 								bottom={"0px"}
 								left='4px'
