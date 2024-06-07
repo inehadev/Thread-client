@@ -12,7 +12,7 @@ const Home = ()=>{
         const getfeedpost =async()=>{
             const token = localStorage.getItem("x-auth-user");
             try {
-                const res = await fetch(`http://localhost:5000/feedpost`, {
+                const res = await fetch(`http://localhost:5000/getfeedpost`, {
                    
                     method: "GET",
                     headers: {
@@ -28,6 +28,7 @@ const Home = ()=>{
                 setPosts(data);
                 if (data.error) {
                 console.log("Error", data.error, "error");
+                
                     
             }}catch (error) {
                 console.log(error)

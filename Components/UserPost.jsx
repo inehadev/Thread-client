@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Action from './Action'
 const UserPost = ({postIMG , postTitle , likes , replies}) => {
     // const[liked  , setliked]=useState(liked)
+   
  
   return (
     <>
@@ -52,7 +53,7 @@ const UserPost = ({postIMG , postTitle , likes , replies}) => {
                 <Flex justifyContent={"space-between"} w={"full"}>
                     <Flex w={"full"} alignItems={"center"}>
                         <Text fontsize = {"sm"} fontWeinght={"bold"}>
-                            markzuckerberg
+                            mark
                         </Text>
                         <Image src='/verified.png' w={4} h={4} ml={1}/>
 

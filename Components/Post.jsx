@@ -14,30 +14,30 @@ const Post = ({post , postedBy}) => {
     const currentUser = useRecoilValue(userScreenAtom);
     const [user , setuser]=useState(null);
    
-    useEffect(() => {
-		const getUser = async () => {
+    // useEffect(() => {
+	// 	const getUser = async () => {
 		
-			try {
-				console.log("nmste")
-				const res = await axios.get(`http://localhost:5000/profile/${user._id}`+postedBy);
-				const data = await res.data;
-				console.log(data)
-						  if (data.error) {
-							  showToast("Error", data.error, "error");
-							  return;
-						  }
-				setuser(data);
-			} catch (error) {
-			console.log(error);
-				setuser(null);
-			}
+	// 		try {
+	// 			console.log("nmste")
+	// 			const res = await axios.get(`http://localhost:5000/profile/${user._id}`+postedBy);
+	// 			const data = await res.data;
+	// 			console.log(data)
+	// 					  if (data.error) {
+	// 						  showToast("Error", data.error, "error");
+	// 						  return;
+	// 					  }
+	// 			setuser(data);
+	// 		} catch (error) {
+	// 		console.log(error);
+	// 			setuser(null);
+	// 		}
 
-		};
+	// 	};
 
-		getUser();
-	}, [postedBy]);
-	console.log("user is" ,user)
-	console.log("currentUser is" , currentUser)
+	// 	getUser();
+	// }, [postedBy]);
+	// console.log("user is" ,user)
+	// console.log("currentUser is" , currentUser)
 	
   return (
     <>
@@ -46,7 +46,7 @@ const Post = ({post , postedBy}) => {
 				<Flex flexDirection={"column"} alignItems={"center"}>
 					<Avatar
 						size='md'
-						name={user?.username}
+						name={currentUser.name}
 						src={currentUser?.profilepic}
 						onClick={(e) => {
 							e.preventDefault();
